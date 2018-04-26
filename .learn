@@ -1,8 +1,12 @@
 tags:
   - jupyter
-  - python
+  - sql
+  - create
+  - insert
+  - alter
+  - delete
 
-languages: python
+languages: sql
 
 jupyter_notebook: true
 
