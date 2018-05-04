@@ -1,5 +1,7 @@
 import unittest, pdb
 from sql_runner import SQLRunner
+import sys
+sys.path.insert(0, '..')
 
 
 class TestSQLBasicOperations(unittest.TestCase):
@@ -58,4 +60,3 @@ class TestSQLBasicOperations(unittest.TestCase):
         test_delete = deletion.execute("SELECT * FROM planets").fetchall()
 
         self.assertEqual(len(test_delete), 8, "Delete Pluto!")
-        
