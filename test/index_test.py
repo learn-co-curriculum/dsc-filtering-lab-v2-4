@@ -53,7 +53,7 @@ class TestSQLBasicOperations(unittest.TestCase):
         table = sql_runner.execute_alter_file()
         table_values = sql_runner.execute_insert_file()
         update = sql_runner.execute_update_file()
-        result = 69
+        result = 68
 
         self.assertEqual(table_values.execute("SELECT num_of_moons FROM planets WHERE name = 'Jupiter';").fetchone()[0], result)
 
