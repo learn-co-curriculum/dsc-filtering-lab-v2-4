@@ -19,11 +19,11 @@ NASA wants to go to Mars!  Before they build their rocket, NASA needs to track i
 
 In the `create.sql` file, use the `CREATE TABLE` command to create a table called `planets`.  Remember, your statement should look like the following:
 
-> ```sql
+```sql
 CREATE TABLE table_name (
    # column_names and data types here
 );
-  ```
+```
 
 NASA is interested in comparing each planet across several characteristics.  They want to know each planet's name,  color, number of moons, and mass (relative to earth).  Your columns should be the following types:
 
@@ -63,7 +63,7 @@ Refer to the [SQLite3 documentation](https://www.sqlite.org/datatype3.html) to r
 
 #### Update table data
 
-NASA has confirmed that Jupiter has another 25 moons!  Write an `UPDATE` command in `update.sql` so that Jupiter has 68 moons instead of 53.
+NASA has confirmed that Jupiter has another 15 moons!  Write an `UPDATE` command in `update.sql` so that Jupiter has 68 moons instead of 53.
 
 > **Hint**: you probably need to use a `WHERE` statement to accomplish this task.
 
