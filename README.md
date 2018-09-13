@@ -1,7 +1,8 @@
 
 # SQL Solar System Lab
 
-NASA wants to go to Mars!  Before they build their rocket, NASA needs to track information about all of the planets in the Solar System.  Use SQL to help NASA build a database that stores all of this important information.
+## Introduction 
+NASA wants to go to Mars! Before they build their rocket, NASA needs to track information about all of the planets in the Solar System. Use SQL to help NASA build a database that stores all of this important information.
 
 ![solar_system](https://bilingualcarloscano.files.wordpress.com/2010/05/venus.jpg)
 
@@ -17,7 +18,7 @@ NASA wants to go to Mars!  Before they build their rocket, NASA needs to track i
 
 #### Create a table
 
-In the `create.sql` file, use the `CREATE TABLE` command to create a table called `planets`.  Remember, your statement should look like the following:
+In the `create.sql` file, use the `CREATE TABLE` command to create a table called `planets`.  Remember: your create table statement should be formatted like the following:
 
 ```sql
 CREATE TABLE table_name (
@@ -35,7 +36,7 @@ NASA is interested in comparing each planet across several characteristics.  The
 |num_of_moons  |integer|
 |mass   | real  |
 
-Make sure to set the `id` column as the table's primary key.
+> **Notes:** Make sure to set the `id` column as the table's primary key.
 
 #### Alter the table
 

@@ -17,19 +17,19 @@ class TestSQLBasicOperations(unittest.TestCase):
             columns.append(cleaned_col)
         # id
         self.assertEqual(columns[0][0], 'id', 'id not set to Primary Key')
-        self.assertEqual(columns[0][1], 'INTEGER', 'id not set to Primary Key')
+        self.assertEqual(columns[0][1].upper(), 'INTEGER', 'id not set to Primary Key')
         # name
         self.assertEqual(columns[1][0], 'name', 'name not set to TEXT')
-        self.assertEqual(columns[1][1], 'TEXT', 'name not set to TEXT')
+        self.assertEqual(columns[1][1].upper(), 'TEXT', 'name not set to TEXT')
         # color
         self.assertEqual(columns[2][0], 'color', 'color not set to TEXT')
-        self.assertEqual(columns[2][1], 'TEXT', 'color not set to TEXT')
+        self.assertEqual(columns[2][1].upper(), 'TEXT', 'color not set to TEXT')
         # num_of_moons
         self.assertEqual(columns[3][0], 'num_of_moons', 'num_of_moons not set to INTEGER')
-        self.assertEqual(columns[3][1], 'INTEGER', 'num_of_moons not set to INTEGER')
+        self.assertEqual(columns[3][1].upper(), 'INTEGER', 'num_of_moons not set to INTEGER')
         # mass
         self.assertEqual(columns[4][0], 'mass', 'mass not set to REAL')
-        self.assertEqual(columns[4][1], 'REAL', 'mass not set to REAL')
+        self.assertEqual(columns[4][1].upper(), 'REAL', 'mass not set to REAL')
 
     def test_alter_table(self):
         sql_runner = SQLRunner()
