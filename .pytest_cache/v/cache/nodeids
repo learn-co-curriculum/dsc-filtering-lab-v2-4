@@ -1,0 +1,7 @@
+[
+  "test/index_test.py::test_create_table",
+  "test/index_test.py::test_alter_table",
+  "test/index_test.py::test_insert_into",
+  "test/index_test.py::test_update_jupiter",
+  "test/index_test.py::test_delete_from"
+]
