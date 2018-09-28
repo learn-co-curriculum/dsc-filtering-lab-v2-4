@@ -1,7 +1,1 @@
-CREATE TABLE planets (
-  id integer primary key,
-  name text,
-  color text,
-  num_of_moons integer,
-  mass real
-);
+CREATE TABLE planets (id INTEGER PRIMARY KEY, name TEXT, color TEXT, num_of_moons INTEGER, mass REAL);
