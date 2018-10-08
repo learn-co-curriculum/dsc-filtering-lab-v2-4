@@ -15,6 +15,10 @@ You will be able to:
 
 ## Instructions
 
+** Note, in this lesson the workflow will be a little different that usual. Instead of *just* editing your Jupyter Notebook, you're also going to have to use a text editor to put some SQL statements into a number of separate text files. **
+
+**We're doing that (a) because it makes it easier for us to be able to write and run automated tests to "check your work", and (b) because as you start working on more complex projects, you'll often find yourself working with not just a Jupyter Notebook, but also some text files. For example, when you start to write your own **
+
 ### Part 1: Table setup
 
 #### Create a table
