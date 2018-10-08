@@ -19,7 +19,7 @@ You will be able to:
 
 #### Create a table
 
-In the `create.sql` file, use the `CREATE TABLE` command to create a table called `planets`.  
+Start by opening up the create.sql file in this directory in a text editor (not Jupyter Notebook). Write the necessary SQL in there to create a table using the `CREATE TABLE` command. Call the table `planets`. Save the file.
 
 **Remember:** your create table statement should be formatted like the following:
 
@@ -41,15 +41,36 @@ NASA is interested in comparing each planet across several characteristics.  The
 
 > **Notes:** Make sure to set the `id` column as the table's primary key.
 
+Now, create a sqlite database (lets call it planets.db), connect to it, and run the SQL from the create.sql file by reading it in and then executing it. 
+
+> *Open up the hints.md file in this directory and look at hint # 1 if you need some help getting the database initialized and hint # 2 if you need some help figuring out how to read in the contents of the file *
+
+
+
+
+```python
+# Create the SQL database and connect to it
+
+# Read in the contents of the create.sql file
+
+# Execute that SQL against your database
+
+```
+
 #### Alter the table
 
-NASA notices that several of the planets have rings around them.  However, we do not have a column to keep track of this information.  In the `alter.sql` file, use the `ALTER TABLE` statement to add a column called `rings` with a data type of `boolean` to the `planets` table.
+NASA notices that several of the planets have rings around them.  However, we do not have a column to keep track of this information.  Open up alter.sql in a text editor, and write and save your SQL to use the `ALTER TABLE` statement to add a column called `rings` with a data type of `boolean` to the `planets` table. Write the code below to read in and execute that SQL against your database.
+
+
+```python
+# Your code for reading and executing alter.sql
+```
 
 ### Part 2: Add and remove data
 
 #### Add data to the table
 
-In the `insert.sql` file, input data for the nine planets that constitute the Solar System using the `INSERT INTO` command.  The relevant information is provided in the table below:
+Populate the empty `insert.sql` file in this directory with data for the nine planets that constitute the Solar System using the `INSERT INTO` command.  The relevant information is provided in the table below:
 
 |name   |color |num_of_moons|mass|rings|
 |-------|-------|-------|-------|-------|
@@ -65,19 +86,36 @@ In the `insert.sql` file, input data for the nine planets that constitute the So
 
 Refer to the [SQLite3 documentation](https://www.sqlite.org/datatype3.html) to remember how to express boolean values in SQLite3.
 
+Then execute the contents of that file against the sqlite database using the cell below
+
+
+```python
+# Your code to read in the SQL from insert.sql and execute it
+```
+
 #### Update table data
 
-NASA has confirmed that Jupiter has another 15 moons!  Write an `UPDATE` command in `update.sql` so that Jupiter has 68 moons instead of 53.
+NASA has confirmed that Jupiter has another 15 moons! In the empty update.sql file, write an `UPDATE` command so that Jupiter has 68 moons instead of 53.
 
 > **Hint**: you probably need to use a `WHERE` statement to accomplish this task.
 
+
+```python
+# Your code to read in the SQL from update.sql and execute it
+```
+
 #### Remove data from the table
 
-Wait just a moment!  NASA decided that Pluto is no longer a planet.  In the `delete.sql` file, remove Pluto from the table using the `DELETE FROM` command.
+Wait just a moment!  NASA decided that Pluto is no longer a planet.  In the empty delete.sql file in this directory, remove Pluto from the table using the `DELETE FROM` command.
+
+
+```python
+# Your code to read in the SQL from delete.sql and execute it
+```
 
 ## Onto Selecting Data
 
-We will be querying data from the `planets` table we just created. We can see it again below. No need to query the table we just created for the following set of tests. This `planets` table is created in the `create.sql` file and already seeded with data from the `seed.sql` file. The table's data and structure is provided below:
+We will be querying data from the `planets` table we just created. We can see it again below:
 
 |name   |color |num_of_moons|mass|rings|
 |-------|-------|-------|-------|-------|
