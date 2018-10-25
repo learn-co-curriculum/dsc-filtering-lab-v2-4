@@ -146,7 +146,7 @@ def select_example_func():
 * `select_all_planets_with_mass_greater_than_one` should return all columns for each planet whose mass is greater than 1.00
 
 
-* `select_name_and_mass_of_planets_with_mass_less_than_equal_to_one` should return the name and mass of each planet whose mass is greater than or equal to 1.00
+* `select_name_and_mass_of_planets_with_mass_less_than_equal_to_one` should return the name and mass of each planet whose mass is less than or equal to 1.00
 
 * `select_name_and_color_of_planets_with_more_than_10_moons` should return the name and color of each planets that has more than 10 moons
 
