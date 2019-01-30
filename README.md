@@ -1,6 +1,7 @@
 
 # Selecting Data - Lab
 
+
 ## Introduction 
 
 NASA wants to go to Mars! Before they build their rocket, NASA needs to track information about all of the planets in the Solar System. Use SQL to help NASA create, alter, and insert data into a database that stores all of this important information. Then practice querying the database with various `SELECT` statements. We will select different columns, and employ other SQL clauses like `WHERE` to return the data we would like.
@@ -19,11 +20,27 @@ You will be able to:
 
 **We're doing that (a) because it makes it easier for us to be able to write and run automated tests to "check your work", and (b) because as you start working on more complex projects, you'll often find yourself working with not just a Jupyter Notebook, but also some text files. For example, when you start to write your own re-usable code for cleaning up data you might well decide to create some Python files that you can access from and share between different Notebooks. **
 
-### Part 1: Table setup
+## Part 1: Create the Database
+
+To start, let's create a database using sqlite3. To do this, import the package and create a connection as we did in the previous lecture. This method connects to a database if it exists, or creates a new one if none exists. In this case, we'll create a new database called **planets.db**.
+
+
+```python
+# Import sqlite3, then create the SQL database/connect to it (creating the database connection will create a DB)
+```
+
+Now create a cursor object so that you can execute statements through your connection.
+
+
+```python
+#Your code here; create a cursor object so you can execute statement against the database.
+```
+
+## Part 2: Table setup
 
 #### Create a table
 
-Start by opening up the create.sql file in this directory in a text editor (not Jupyter Notebook). Write the necessary SQL in there to create a table using the `CREATE TABLE` command. Call the table `planets`. Save the file.
+Write the necessary SQL to create a table using the `CREATE TABLE` command. Call the table `planets`.
 
 **Remember:** your create table statement should be formatted like the following:
 
@@ -45,20 +62,9 @@ NASA is interested in comparing each planet across several characteristics.  The
 
 > **Notes:** Make sure to set the `id` column as the table's primary key.
 
-Now, create a sqlite database (lets call it planets.db), connect to it, and run the SQL from the create.sql file by reading it in and then executing it. 
-
-> *Open up the hints.md file in this directory and look at hint # 1 if you need some help getting the database initialized and hint # 2 if you need some help figuring out how to read in the contents of the file *
-
-
-
 
 ```python
-# Create the SQL database and connect to it
-
-# Read in the contents of the create.sql file
-
-# Execute that SQL against your database
-
+#Your code here; create the table as described above.
 ```
 
 #### Alter the table
@@ -70,11 +76,11 @@ NASA notices that several of the planets have rings around them.  However, we do
 # Your code for reading and executing alter.sql
 ```
 
-### Part 2: Add and remove data
+## Part 3: Add and remove data
 
 #### Add data to the table
 
-Populate the empty `insert.sql` file in this directory with data for the nine planets that constitute the Solar System using the `INSERT INTO` command.  The relevant information is provided in the table below:
+Populate the table with data for the nine planets that constitute the Solar System using the `INSERT INTO` command.  The relevant information is provided in the table below:
 
 |name   |color |num_of_moons|mass|rings|
 |-------|-------|-------|-------|-------|
@@ -90,31 +96,31 @@ Populate the empty `insert.sql` file in this directory with data for the nine pl
 
 Refer to the [SQLite3 documentation](https://www.sqlite.org/datatype3.html) to remember how to express boolean values in SQLite3.
 
-Then execute the contents of that file against the sqlite database using the cell below
+**Hint:** to save some tedious typing, feel free to open up this cell and copy and paste some of the text to modify in your insert command below.
 
 
 ```python
-# Your code to read in the SQL from insert.sql and execute it
+#Your code here; add data to the table
 ```
 
 #### Update table data
 
-NASA has confirmed that Jupiter has another 15 moons! In the empty update.sql file, write an `UPDATE` command so that Jupiter has 68 moons instead of 53.
+NASA has confirmed that Jupiter has another 15 moons! Write an `UPDATE` command so that Jupiter has 68 moons instead of 53.
 
 > **Hint**: you probably need to use a `WHERE` statement to accomplish this task.
 
 
 ```python
-# Your code to read in the SQL from update.sql and execute it
+# Your code to update the table
 ```
 
 #### Remove data from the table
 
-Wait just a moment!  NASA decided that Pluto is no longer a planet.  In the empty delete.sql file in this directory, remove Pluto from the table using the `DELETE FROM` command.
+Wait just a moment!  NASA decided that Pluto is no longer a planet. Remove Pluto from the table using the `DELETE FROM` command.
 
 
 ```python
-# Your code to read in the SQL from delete.sql and execute it
+# Your code to delete pluto here
 ```
 
 ## Onto Selecting Data
@@ -132,27 +138,602 @@ We will be querying data from the `planets` table we just created. We can see it
 |Uranus |light blue|27  |14.54  |yes    |
 |Neptune|dark blue|14   |17.15  |yes    |
 
-Write your `SELECT` SQL queries inside the `sql_selects.py` file. To get the tests in `test/index_test.py` to pass, add the correct SQL query to the empty string returned in each function. See the example below.
+Write SQL queries for each of the statements below. You can also preview the results as a nice pandas DataFrame if you want to see the output like this:
+
+## Some Notes on Displaying Query Outputs
+
+Let's take brief look at nicely displaying the results of the sql queries you are about to write. Specifically, we'll look at how to pipe your sql queries into Pandas so that you can use your standard data processing techniques and build your workflow into pipelines.
+
 
 ```python
-def select_example_func():
-    return '''SQL SELECT STATEMENT GOES HERE'''
+import pandas as pd
 ```
 
-* `select_all_columns_and_rows` should return all of the data featured in the `planets` table
 
-* `select_name_and_color_of_all_planets` should return the name and color of each planet
+```python
+#Demonstrating running a query and previewing results as pandas DataFrame
+results = cur.execute("""select * from planets;""").fetchall()
 
-* `select_all_planets_with_mass_greater_than_one` should return all columns for each planet whose mass is greater than 1.00
+#Alternatively we could do this in two steps:
+#cur.execute("""select * from planets;""")
+#results = cur.fetchall()
+df = pd.DataFrame(results)
+df. columns = [i[0] for i in cur.description]
+df.head()
+```
 
 
-* `select_name_and_mass_of_planets_with_mass_less_than_equal_to_one` should return the name and mass of each planet whose mass is less than or equal to 1.00
 
-* `select_name_and_color_of_planets_with_more_than_10_moons` should return the name and color of each planets that has more than 10 moons
 
-* `select_all_planets_with_moons_and_mass_less_than_one` should return the planet that has at least one moon and a mass less than 1.00
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-* `select_name_and_color_of_all_blue_planets` should return the name and color of planets that have a color of blue, light blue, or dark blue
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>name</th>
+      <th>color</th>
+      <th>num_of_moons</th>
+      <th>mass</th>
+      <th>rings</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>Mercury</td>
+      <td>gray</td>
+      <td>0</td>
+      <td>0.55</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>Venus</td>
+      <td>yellow</td>
+      <td>0</td>
+      <td>0.82</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Earth</td>
+      <td>blue</td>
+      <td>1</td>
+      <td>1.00</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>Mars</td>
+      <td>red</td>
+      <td>2</td>
+      <td>0.11</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>Jupiter</td>
+      <td>orange</td>
+      <td>68</td>
+      <td>317.90</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+For simplicity, you may wish to make this process a function:
+
+
+```python
+def sql_select_to_df(SQL_COMMAND, cur=cur):
+    results = cur.execute(SQL_COMMAND).fetchall()
+    df = pd.DataFrame(results)
+    df. columns = [i[0] for i in cur.description]
+    return df
+```
+
+
+```python
+df = sql_select_to_df("""select * from planets;""")
+df.head()
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>name</th>
+      <th>color</th>
+      <th>num_of_moons</th>
+      <th>mass</th>
+      <th>rings</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>Mercury</td>
+      <td>gray</td>
+      <td>0</td>
+      <td>0.55</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>Venus</td>
+      <td>yellow</td>
+      <td>0</td>
+      <td>0.82</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Earth</td>
+      <td>blue</td>
+      <td>1</td>
+      <td>1.00</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>Mars</td>
+      <td>red</td>
+      <td>2</td>
+      <td>0.11</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>Jupiter</td>
+      <td>orange</td>
+      <td>68</td>
+      <td>317.90</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+With that, it's time to practice your sql skills!
+
+## Select just the name and color of each planet
+
+
+```python
+#Your code here
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>color</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Mercury</td>
+      <td>gray</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Venus</td>
+      <td>yellow</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Earth</td>
+      <td>blue</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Mars</td>
+      <td>red</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Jupiter</td>
+      <td>orange</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Saturn</td>
+      <td>hazel</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Uranus</td>
+      <td>light blue</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Neptune</td>
+      <td>dark blue</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+## Select all columns for each planet whose mass is greater than 1.00
+
+
+
+```python
+#Your code here
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>name</th>
+      <th>color</th>
+      <th>num_of_moons</th>
+      <th>mass</th>
+      <th>rings</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5</td>
+      <td>Jupiter</td>
+      <td>orange</td>
+      <td>68</td>
+      <td>317.90</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>6</td>
+      <td>Saturn</td>
+      <td>hazel</td>
+      <td>62</td>
+      <td>95.19</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>7</td>
+      <td>Uranus</td>
+      <td>light blue</td>
+      <td>27</td>
+      <td>14.54</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>8</td>
+      <td>Neptune</td>
+      <td>dark blue</td>
+      <td>14</td>
+      <td>17.15</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+## Select the name and mass of each planet whose mass is less than or equal to 1.00
+
+
+```python
+#Your code here
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>mass</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Mercury</td>
+      <td>0.55</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Venus</td>
+      <td>0.82</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Earth</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Mars</td>
+      <td>0.11</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+## Select the name and color of each planet that has more than 10 moons
+
+
+```python
+#Your code here
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>color</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Jupiter</td>
+      <td>orange</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Saturn</td>
+      <td>hazel</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Uranus</td>
+      <td>light blue</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Neptune</td>
+      <td>dark blue</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+## Select the planet that has at least one moon and a mass less than 1.00
+
+
+```python
+#Your code here
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>name</th>
+      <th>color</th>
+      <th>num_of_moons</th>
+      <th>mass</th>
+      <th>rings</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>3</td>
+      <td>Earth</td>
+      <td>blue</td>
+      <td>1</td>
+      <td>1.00</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4</td>
+      <td>Mars</td>
+      <td>red</td>
+      <td>2</td>
+      <td>0.11</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+## Select the name and color of planets that have a color of blue, light blue, or dark blue
+
+
+```python
+#Your code here
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>color</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Earth</td>
+      <td>blue</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Uranus</td>
+      <td>light blue</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Neptune</td>
+      <td>dark blue</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
 
 ## Summary
 
