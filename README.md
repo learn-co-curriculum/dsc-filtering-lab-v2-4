@@ -250,7 +250,7 @@ For simplicity, you may wish to make this process a function:
 def sql_select_to_df(SQL_COMMAND, cur=cur):
     results = cur.execute(SQL_COMMAND).fetchall()
     df = pd.DataFrame(results)
-    df. columns = [i[0] for i in cur.description]
+    df.columns = [i[0] for i in cur.description]
     return df
 ```
 
