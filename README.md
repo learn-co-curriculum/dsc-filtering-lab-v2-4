@@ -2,6 +2,8 @@
 # Selecting Data - Lab
 
 
+For the old version of this lab go [here](https://github.com/learn-co-curriculum/dsc-1-05-06-selecting-data-lab-old).
+
 ## Introduction 
 
 NASA wants to go to Mars! Before they build their rocket, NASA needs to track information about all of the planets in the Solar System. Use SQL to help NASA create, alter, and insert data into a database that stores all of this important information. Then practice querying the database with various `SELECT` statements. We will select different columns, and employ other SQL clauses like `WHERE` to return the data we would like.

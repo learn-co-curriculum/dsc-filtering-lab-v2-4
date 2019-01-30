@@ -1,13 +1,9 @@
-tags:
-  - jupyter
-  - sql
-  - create
-  - insert
-  - alter
-  - delete
+tags: 
+- jupyter 
+- python 
 
-languages: sql
+languages: python 
 
-jupyter_notebook: true
+jupyter_notebook: true 
 
 resources: 0
