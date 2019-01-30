@@ -1,6 +1,7 @@
 
 # Selecting Data - Lab
 
+For the old version of this lab go [here](https://github.com/learn-co-curriculum/dsc-1-05-06-selecting-data-lab-old).
 
 ## Introduction 
 
@@ -227,7 +228,7 @@ results = cur.execute("""select * from planets;""").fetchall()
 #cur.execute("""select * from planets;""")
 #results = cur.fetchall()
 df = pd.DataFrame(results)
-df. columns = [i[0] for i in cur.description]
+df.columns = [i[0] for i in cur.description]
 df.head()
 ```
 
