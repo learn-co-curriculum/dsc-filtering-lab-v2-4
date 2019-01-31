@@ -16,12 +16,6 @@ You will be able to:
 * Retrieve a subset of records from a table using a `WHERE` clause
 * Retrieve a subset of columns from a table
 
-## Instructions
-
-**Note, in this lesson the workflow will be a little different that usual. Instead of *just* editing your Jupyter Notebook, you're also going to have to use a text editor to put some SQL statements into a number of separate text files.**
-
-**We're doing that (a) because it makes it easier for us to be able to write and run automated tests to "check your work", and (b) because as you start working on more complex projects, you'll often find yourself working with not just a Jupyter Notebook, but also some text files. For example, when you start to write your own re-usable code for cleaning up data you might well decide to create some Python files that you can access from and share between different Notebooks. **
-
 ## Part 1: Create the Database
 
 To start, let's create a database using sqlite3. To do this, import the package and create a connection as we did in the previous lecture. This method connects to a database if it exists, or creates a new one if none exists. In this case, we'll create a new database called **planets.db**.
@@ -71,7 +65,7 @@ NASA is interested in comparing each planet across several characteristics.  The
 
 #### Alter the table
 
-NASA notices that several of the planets have rings around them.  However, we do not have a column to keep track of this information.  Open up alter.sql in a text editor, and write and save your SQL to use the `ALTER TABLE` statement to add a column called `rings` with a data type of `boolean` to the `planets` table. Write the code below to read in and execute that SQL against your database.
+NASA notices that several of the planets have rings around them.  However, we do not have a column to keep track of this information.  Use the `ALTER TABLE` statement to add a column called `rings` with a data type of `boolean` to the `planets` table. Write the code below to use sqlite3 to execute that SQL query against your database.
 
 
 ```python
