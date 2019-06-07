@@ -345,7 +345,7 @@ df
 
 ```python
 #Your code here
-c.execute("""select * from planets where num_of_moons >=1 and mass <= 1;""")
+c.execute("""select * from planets where num_of_moons >=1 and mass < 1;""")
 df = pd.DataFrame(c.fetchall())
 df.columns = [x[0] for x in c.description]
 df
