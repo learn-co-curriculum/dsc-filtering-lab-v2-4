@@ -383,15 +383,6 @@ df
   <tbody>
     <tr>
       <th>0</th>
-      <td>3</td>
-      <td>Earth</td>
-      <td>blue</td>
-      <td>1</td>
-      <td>1.00</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1</th>
       <td>4</td>
       <td>Mars</td>
       <td>red</td>
