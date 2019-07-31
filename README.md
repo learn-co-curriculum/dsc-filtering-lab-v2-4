@@ -6,7 +6,7 @@
 
 NASA wants to go to Mars! Before they build their rocket, NASA needs to track information about all of the planets in the Solar System. In this lab, you'll practice querying the database with various SELECT statements. This will include selecting different columns, and employ other SQL clauses like WHERE to return the data desired.
 
-![solar_system](https://bilingualcarloscano.files.wordpress.com/2010/05/venus.jpg)
+<img src="./images/planets.png" width="600">
 
 ## Objectives
 You will be able to:
@@ -16,7 +16,7 @@ You will be able to:
 
 ## Connecting to the DataBase
 
-To get started, connect to the database titled planets.db. Don't forget to also make a cursor so that you can later execute your queries.
+To get started, connect to the database titled `planets.db`. Don't forget to also make a cursor so that you can later execute your queries.
 
 
 ```python
@@ -27,7 +27,7 @@ c = conn.cursor()
 
 ## Selecting Data
 
-Here's an overview of the planet's table you'll be querying.  
+Here's an overview of the planet's table you'll be querying.
 
 |name   |color |num_of_moons|mass|rings|
 |-------|-------|-------|-------|-------|
@@ -48,6 +48,9 @@ Write SQL queries for each of the statements below.
 ```python
 import pandas as pd
 ```
+
+## Select all columns for each planet whose mass is greater than 1.00
+
 
 
 ```python
@@ -130,8 +133,7 @@ df
 
 
 
-## Select all columns for each planet whose mass is greater than 1.00
-
+## Select the name and mass of each planet whose mass is less than or equal to 1.00
 
 
 ```python
@@ -214,7 +216,7 @@ df
 
 
 
-## Select the name and mass of each planet whose mass is less than or equal to 1.00
+## Select the name and color of each planet that has more than 10 moons
 
 
 ```python
@@ -277,7 +279,7 @@ df
 
 
 
-## Select the name and color of each planet that has more than 10 moons
+## Select the planet that has at least one moon and a mass less than 1.00
 
 
 ```python
@@ -340,7 +342,7 @@ df
 
 
 
-## Select the planet that has at least one moon and a mass less than 1.00
+## Select the name and color of planets that have a color of blue, light blue, or dark blue
 
 
 ```python
@@ -396,7 +398,7 @@ df
 
 
 
-## Select the name and color of planets that have a color of blue, light blue, or dark blue
+## Summary
 
 
 ```python
@@ -461,6 +463,4 @@ df
 
 
 
-## Summary
-
-Congratulations! NASA is one step closer to embarking upon its mission to Mars. In this lab, You practiced writing select statements that query a single table to get specific information. You also used other clauses and specified column names to cherry pick the data we wanted to retrieve.
+Congratulations! NASA is one step closer to embarking upon its mission to Mars. In this lab, You practiced writing select statements that query a single table to get specific information. You also used other clauses and specified column names to cherry pick the data we wanted to retrieve. 
