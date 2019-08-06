@@ -20,7 +20,7 @@ To get started, connect to the database titled `planets.db`. Don't forget to als
 
 
 ```python
-#Your code here
+# Your code here
 ```
 
 ## Selecting Data
@@ -44,7 +44,7 @@ Write SQL queries for each of the statements below.
 
 
 ```python
-#Your code here
+# Your code here
 ```
 
 
@@ -124,7 +124,7 @@ Write SQL queries for each of the statements below.
 
 
 ```python
-#Your code here
+# Your code here
 ```
 
 
@@ -203,7 +203,7 @@ Write SQL queries for each of the statements below.
 
 
 ```python
-#Your code here
+# Your code here
 ```
 
 
@@ -262,7 +262,7 @@ Write SQL queries for each of the statements below.
 
 
 ```python
-#Your code here
+# Your code here
 ```
 
 
@@ -321,7 +321,7 @@ Write SQL queries for each of the statements below.
 
 
 ```python
-#Your code here
+# Your code here
 ```
 
 
@@ -356,15 +356,6 @@ Write SQL queries for each of the statements below.
   <tbody>
     <tr>
       <th>0</th>
-      <td>3</td>
-      <td>Earth</td>
-      <td>blue</td>
-      <td>1</td>
-      <td>1.00</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1</th>
       <td>4</td>
       <td>Mars</td>
       <td>red</td>
@@ -382,7 +373,7 @@ Write SQL queries for each of the statements below.
 
 
 ```python
-#Your code here
+# Your code here
 ```
 
 
