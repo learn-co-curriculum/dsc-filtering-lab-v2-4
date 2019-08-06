@@ -46,15 +46,8 @@ Write SQL queries for each of the statements below.
 
 
 ```python
+
 import pandas as pd
-```
-
-## Select all columns for each planet whose mass is greater than 1.00
-
-
-
-```python
-#Your code here
 c.execute("""select name, color from planets;""")
 df = pd.DataFrame(c.fetchall())
 df.columns = [x[0] for x in c.description]
@@ -133,11 +126,12 @@ df
 
 
 
-## Select the name and mass of each planet whose mass is less than or equal to 1.00
+## Select all columns for each planet whose mass is greater than 1.00
+
 
 
 ```python
-#Your code here
+
 c.execute("""select * from planets where mass > 1;""")
 df = pd.DataFrame(c.fetchall())
 df.columns = [x[0] for x in c.description]
@@ -216,11 +210,11 @@ df
 
 
 
-## Select the name and color of each planet that has more than 10 moons
+## Select the name and mass of each planet whose mass is less than or equal to 1.00
 
 
 ```python
-#Your code here
+
 c.execute("""select name, mass from planets where mass <= 1;""")
 df = pd.DataFrame(c.fetchall())
 df.columns = [x[0] for x in c.description]
@@ -279,11 +273,12 @@ df
 
 
 
-## Select the planet that has at least one moon and a mass less than 1.00
+## Select the name and color of each planet that has more than 10 moons
 
 
 ```python
-#Your code here
+# Your code here
+
 c.execute("""select name, color from planets where num_of_moons > 10;""")
 df = pd.DataFrame(c.fetchall())
 df.columns = [x[0] for x in c.description]
@@ -342,11 +337,11 @@ df
 
 
 
-## Select the name and color of planets that have a color of blue, light blue, or dark blue
+## Select the planet that has at least one moon and a mass less than 1.00
 
 
 ```python
-#Your code here
+# Your code here
 c.execute("""select * from planets where num_of_moons >=1 and mass < 1;""")
 df = pd.DataFrame(c.fetchall())
 df.columns = [x[0] for x in c.description]
@@ -398,11 +393,11 @@ df
 
 
 
-## Summary
+## Select the name and color of planets that have a color of blue, light blue, or dark blue
 
 
 ```python
-#Your code here
+
 c.execute("""SELECT name, 
                            color 
                            FROM planets 
@@ -462,5 +457,7 @@ df
 </div>
 
 
+
+## Summary
 
 Congratulations! NASA is one step closer to embarking upon its mission to Mars. In this lab, You practiced writing select statements that query a single table to get specific information. You also used other clauses and specified column names to cherry pick the data we wanted to retrieve. 
