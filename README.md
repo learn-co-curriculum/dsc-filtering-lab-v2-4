@@ -130,16 +130,8 @@ Write SQL queries for each of the statements below.
 
 ```python
 # __SOLUTION__ 
+
 import pandas as pd
-```
-
-## Select all columns for each planet whose mass is greater than 1.00
-
-
-
-```python
-# __SOLUTION__ 
-#Your code here
 c.execute("""select name, color from planets;""")
 df = pd.DataFrame(c.fetchall())
 df.columns = [x[0] for x in c.description]
@@ -218,9 +210,12 @@ df
 
 
 
+## Select all columns for each planet whose mass is greater than 1.00
+
+
 
 ```python
-#Your code here
+# Your code here
 ```
 
 
@@ -295,12 +290,10 @@ df
 
 
 
-## Select the name and mass of each planet whose mass is less than or equal to 1.00
-
 
 ```python
 # __SOLUTION__ 
-#Your code here
+
 c.execute("""select * from planets where mass > 1;""")
 df = pd.DataFrame(c.fetchall())
 df.columns = [x[0] for x in c.description]
@@ -379,6 +372,8 @@ df
 
 
 
+## Select the name and mass of each planet whose mass is less than or equal to 1.00
+
 
 ```python
 #Your code here
@@ -435,8 +430,6 @@ df
 </div>
 
 
-
-## Select the name and color of each planet that has more than 10 moons
 
 
 ```python
@@ -500,6 +493,8 @@ df
 
 
 
+## Select the name and color of each planet that has more than 10 moons
+
 
 ```python
 #Your code here
@@ -556,8 +551,6 @@ df
 </div>
 
 
-
-## Select the planet that has at least one moon and a mass less than 1.00
 
 
 ```python
@@ -621,9 +614,11 @@ df
 
 
 
+## Select the planet that has at least one moon and a mass less than 1.00
+
 
 ```python
-#Your code here
+# Your code here
 ```
 
 
@@ -658,15 +653,6 @@ df
   <tbody>
     <tr>
       <th>0</th>
-      <td>3</td>
-      <td>Earth</td>
-      <td>blue</td>
-      <td>1</td>
-      <td>1.00</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1</th>
       <td>4</td>
       <td>Mars</td>
       <td>red</td>
@@ -680,12 +666,10 @@ df
 
 
 
-## Select the name and color of planets that have a color of blue, light blue, or dark blue
-
 
 ```python
 # __SOLUTION__ 
-#Your code here
+# Your code here
 c.execute("""select * from planets where num_of_moons >=1 and mass < 1;""")
 df = pd.DataFrame(c.fetchall())
 df.columns = [x[0] for x in c.description]
@@ -736,6 +720,8 @@ df
 </div>
 
 
+
+## Select the name and color of planets that have a color of blue, light blue, or dark blue
 
 
 ```python
@@ -788,8 +774,6 @@ df
 </div>
 
 
-
-## Summary
 
 
 ```python
@@ -854,5 +838,7 @@ df
 </div>
 
 
+
+## Summary
 
 Congratulations! NASA is one step closer to embarking upon its mission to Mars. In this lab, You practiced writing select statements that query a single table to get specific information. You also used other clauses and specified column names to cherry pick the data we wanted to retrieve. 
