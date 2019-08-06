@@ -20,7 +20,7 @@ To get started, connect to the database titled `planets.db`. Don't forget to als
 
 
 ```python
-#Your code here
+# Your code here
 ```
 
 
@@ -52,7 +52,7 @@ Write SQL queries for each of the statements below.
 
 
 ```python
-#Your code here
+# Your code here
 ```
 
 
@@ -376,7 +376,7 @@ df
 
 
 ```python
-#Your code here
+# Your code here
 ```
 
 
@@ -434,7 +434,7 @@ df
 
 ```python
 # __SOLUTION__ 
-#Your code here
+
 c.execute("""select name, mass from planets where mass <= 1;""")
 df = pd.DataFrame(c.fetchall())
 df.columns = [x[0] for x in c.description]
@@ -497,7 +497,7 @@ df
 
 
 ```python
-#Your code here
+# Your code here
 ```
 
 
@@ -555,7 +555,8 @@ df
 
 ```python
 # __SOLUTION__ 
-#Your code here
+# Your code here
+
 c.execute("""select name, color from planets where num_of_moons > 10;""")
 df = pd.DataFrame(c.fetchall())
 df.columns = [x[0] for x in c.description]
@@ -725,7 +726,7 @@ df
 
 
 ```python
-#Your code here
+# Your code here
 ```
 
 
@@ -778,7 +779,7 @@ df
 
 ```python
 # __SOLUTION__ 
-#Your code here
+
 c.execute("""SELECT name, 
                            color 
                            FROM planets 
