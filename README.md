@@ -4,7 +4,7 @@
 
 ## Introduction 
 
-NASA wants to go to Mars! Before they build their rocket, NASA needs to track information about all of the planets in the Solar System. In this lab, you'll practice querying the database with various SELECT statements. This will include selecting different columns, and employ other SQL clauses like WHERE to return the data desired.
+NASA wants to go to Mars! Before they build their rocket, NASA needs to track information about all of the planets in the Solar System. In this lab, you'll practice querying the database with various `SELECT` statements. This will include selecting different columns and implementing other SQL clauses like `WHERE` to return the data desired.
 
 <img src="./images/planets.png" width="600">
 
@@ -16,13 +16,16 @@ You will be able to:
 
 ## Connecting to the DataBase
 
-To get started, connect to the database titled `planets.db`. Don't forget to also make a cursor so that you can later execute your queries.
+To get started import pandas and sqlite3. Then, connect to the database titled `planets.db`. 
+
+Don't forget to instantiate a cursor so that you can later execute your queries.
 
 
 ```python
+import pandas as pd
 import sqlite3
 conn = sqlite3.connect('planets.db')
-c = conn.cursor()
+cur = conn.cursor()
 ```
 
 ## Selecting Data
@@ -40,17 +43,16 @@ Here's an overview of the planet's table you'll be querying.
 |Uranus |light blue|27  |14.54  |yes    |
 |Neptune|dark blue|14   |17.15  |yes    |
 
-Write SQL queries for each of the statements below.
+Write SQL queries for each of the statements below using the same pandas wrapping syntax from the previous lesson.
 
 ## Select just the name and color of each planet
 
 
 ```python
 
-import pandas as pd
-c.execute("""select name, color from planets;""")
-df = pd.DataFrame(c.fetchall())
-df.columns = [x[0] for x in c.description]
+cur.execute("""SELECT name, color FROM planets;""")
+df = pd.DataFrame(cur.fetchall())
+df.columns = [x[0] for x in cur.description]
 df
 ```
 
@@ -132,9 +134,9 @@ df
 
 ```python
 
-c.execute("""select * from planets where mass > 1;""")
-df = pd.DataFrame(c.fetchall())
-df.columns = [x[0] for x in c.description]
+cur.execute("""SELECT * FROM planets WHERE mass > 1;""")
+df = pd.DataFrame(cur.fetchall())
+df.columns = [x[0] for x in cur.description]
 df
 ```
 
@@ -215,9 +217,9 @@ df
 
 ```python
 
-c.execute("""select name, mass from planets where mass <= 1;""")
-df = pd.DataFrame(c.fetchall())
-df.columns = [x[0] for x in c.description]
+cur.execute("""SELECT name, mass FROM planets WHERE mass <= 1;""")
+df = pd.DataFrame(cur.fetchall())
+df.columns = [x[0] for x in cur.description]
 df
 ```
 
@@ -277,11 +279,10 @@ df
 
 
 ```python
-# Your code here
 
-c.execute("""select name, color from planets where num_of_moons > 10;""")
-df = pd.DataFrame(c.fetchall())
-df.columns = [x[0] for x in c.description]
+cur.execute("""SELECT name, color FROM planets WHERE num_of_moons > 10;""")
+df = pd.DataFrame(cur.fetchall())
+df.columns = [x[0] for x in cur.description]
 df
 ```
 
@@ -341,10 +342,12 @@ df
 
 
 ```python
-# Your code here
-c.execute("""select * from planets where num_of_moons >=1 and mass < 1;""")
-df = pd.DataFrame(c.fetchall())
-df.columns = [x[0] for x in c.description]
+
+cur.execute("""SELECT * FROM planets 
+               WHERE num_of_moons >=1 
+               AND mass < 1;""")
+df = pd.DataFrame(cur.fetchall())
+df.columns = [x[0] for x in cur.description]
 df
 ```
 
@@ -398,17 +401,29 @@ df
 
 ```python
 
-c.execute("""SELECT name, 
-                           color 
-                           FROM planets 
-                           WHERE color == 'blue'
-                           OR color == 'light blue'
-                           OR color == 'dark blue';
-                 """
-                )
-df = pd.DataFrame(c.fetchall())
-df.columns = [x[0] for x in c.description]
+cur.execute("""SELECT name, color 
+               FROM planets 
+               WHERE color == 'blue'
+               OR color == 'light blue'
+               OR color == 'dark blue';
+               """)
+df = pd.DataFrame(cur.fetchall())
+df.columns = [x[0] for x in cur.description]
 df
+
+
+## While the above solution works, it's a bit clunky and inefficient.
+## Here is an alternate solution that makes use of SQL's LIKE clause.
+## For more information on the LIKE clause, check out this resource
+## http://www.sqlitetutorial.net/sqlite-like/
+
+# cur.execute("""SELECT name, color 
+#              FROM planets
+#              WHERE color LIKE '%blue%';
+#              """)
+# df = pd.DataFrame(cur.fetchall())
+# df.columns = [x[0] for x in cur.description]
+# df
 ```
 
 
@@ -451,6 +466,78 @@ df
       <th>2</th>
       <td>Neptune</td>
       <td>dark blue</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+## Select the name, color, and number of moons for the 4 largest planets that don't have rings and order them from largest to smallest
+
+
+```python
+
+cur.execute("""SELECT name, color, num_of_moons 
+               FROM planets
+               WHERE rings = 0
+               ORDER BY mass DESC
+               LIMIT 4;""")
+df = pd.DataFrame(cur.fetchall())
+df.columns = [x[0] for x in cur.description]
+df
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>color</th>
+      <th>num_of_moons</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Jupiter</td>
+      <td>orange</td>
+      <td>68</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Earth</td>
+      <td>blue</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Venus</td>
+      <td>yellow</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Mercury</td>
+      <td>gray</td>
+      <td>0</td>
     </tr>
   </tbody>
 </table>
