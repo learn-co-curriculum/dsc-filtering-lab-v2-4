@@ -28,6 +28,7 @@ Don't forget to instantiate a cursor so that you can later execute your queries.
 
 ```python
 # __SOLUTION__
+# Your code here
 import pandas as pd
 import sqlite3
 conn = sqlite3.connect('planets.db')
@@ -133,7 +134,7 @@ Write SQL queries for each of the statements below using the same pandas wrappin
 
 ```python
 # __SOLUTION__ 
-
+# Your code here
 cur.execute("""SELECT name, color FROM planets;""")
 df = pd.DataFrame(cur.fetchall())
 df.columns = [x[0] for x in cur.description]
@@ -295,7 +296,7 @@ df
 
 ```python
 # __SOLUTION__ 
-
+# Your code here
 cur.execute("""SELECT * FROM planets WHERE mass > 1;""")
 df = pd.DataFrame(cur.fetchall())
 df.columns = [x[0] for x in cur.description]
@@ -436,7 +437,7 @@ df
 
 ```python
 # __SOLUTION__ 
-
+# Your code here
 cur.execute("""SELECT name, mass FROM planets WHERE mass <= 1;""")
 df = pd.DataFrame(cur.fetchall())
 df.columns = [x[0] for x in cur.description]
@@ -557,7 +558,7 @@ df
 
 ```python
 # __SOLUTION__ 
-
+# Your code here
 cur.execute("""SELECT name, color FROM planets WHERE num_of_moons > 10;""")
 df = pd.DataFrame(cur.fetchall())
 df.columns = [x[0] for x in cur.description]
@@ -671,7 +672,7 @@ df
 
 ```python
 # __SOLUTION__ 
-
+# Your code here
 cur.execute("""SELECT * FROM planets 
                WHERE num_of_moons >=1 
                AND mass < 1;""")
@@ -782,7 +783,7 @@ df
 
 ```python
 # __SOLUTION__ 
-
+# Your code here
 cur.execute("""SELECT name, color 
                FROM planets 
                WHERE color == 'blue'
@@ -922,7 +923,7 @@ df
 
 ```python
 # __SOLUTION__ 
-
+# Your code here
 cur.execute("""SELECT name, color, num_of_moons 
                FROM planets
                WHERE rings = 0
