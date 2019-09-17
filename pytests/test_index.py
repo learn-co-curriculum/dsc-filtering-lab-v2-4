@@ -1,6 +1,3 @@
-# library used to check working virtual environment
-import importlib
-# library used to write tests
 import pytest
 from sql_runner import SQLRunner
 from sql_runner_selects import SQLRunnerSelects
@@ -10,9 +7,6 @@ sql_runner_select = SQLRunnerSelects()
 table_select = sql_runner_select.execute_create_file()
 table_select = sql_runner_select.execute_seed_file()
 
-# tests to ensure correct environment is loaded
-def test_conda_environment_activated():
-    assert importlib.util.find_spec("obscure"), "It looks like you didn't 'conda activate learn-env' - try that then run the test again!"
 
 def test_create_table():
     sql_runner = SQLRunner()
