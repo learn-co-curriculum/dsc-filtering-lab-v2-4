@@ -10,8 +10,10 @@ NASA wants to go to Mars! Before they build their rocket, NASA needs to track in
 
 ## Objectives
 You will be able to:
-* Retrieve all the information from a table
+* Connect to a SQL database using Python
+* Retrieve all information from a SQL table
 * Retrieve a subset of records from a table using a `WHERE` clause
+* Write SQL queries to filter and order results
 * Retrieve a subset of columns from a table
 
 ## Connecting to the DataBase
@@ -548,4 +550,4 @@ df
 
 ## Summary
 
-Congratulations! NASA is one step closer to embarking upon its mission to Mars. In this lab, You practiced writing select statements that query a single table to get specific information. You also used other clauses and specified column names to cherry-pick the data we wanted to retrieve. 
+Congratulations! NASA is one step closer to embarking upon its mission to Mars. In this lab, You practiced writing `SELECT` statements that query a single table to get specific information. You also used other clauses and specified column names to cherry-pick the data we wanted to retrieve. 
