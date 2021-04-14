@@ -1,4 +1,3 @@
-
 # Selecting Data - Lab
 
 
@@ -16,11 +15,9 @@ You will be able to:
 * Write SQL queries to filter and order results
 * Retrieve a subset of columns from a table
 
-## Connecting to the DataBase
+## Connecting to the Database
 
-To get started import pandas and sqlite3. Then, connect to the database titled `planets.db`. 
-
-Don't forget to instantiate a cursor so that you can later execute your queries.
+To get started, import `sqlite3` as well as `pandas` for conveniently displaying results. Then, connect to the SQLite database located at `planets.db`. 
 
 
 ```python
@@ -30,27 +27,38 @@ Don't forget to instantiate a cursor so that you can later execute your queries.
 
 ```python
 # __SOLUTION__
-# Your code here
 import pandas as pd
 import sqlite3
 conn = sqlite3.connect('planets.db')
-cur = conn.cursor()
 ```
 
-## Selecting Data
+## Database Schema
 
-Here's an overview of the planet's table you'll be querying.
+This database contains a single table, `planets`. This is the schema:
 
-|name   |color |num_of_moons|mass|rings|
-|-------|-------|-------|-------|-------|
-|Mercury|gray   |0      |0.55   |no     |
-|Venus  |yellow |0      |0.82   |no     |
-|Earth  |blue   |1      |1.00   |no     |
-|Mars   |red    |2      |0.11   |no     |
-|Jupiter|orange |67     |317.90 |no     |
-|Saturn |hazel  |62     |95.19  |yes    |
-|Uranus |light blue|27  |14.54  |yes    |
-|Neptune|dark blue|14   |17.15  |yes    |
+```
+CREATE TABLE planets (
+  id INTEGER PRIMARY KEY,
+  name TEXT,
+  color TEXT,
+  num_of_moons INTEGER,
+  mass REAL,
+  rings BOOLEAN
+);
+```
+
+The data looks something like this:
+
+| id | name    | color      | num_of_moons | mass   | rings |
+| -- | ------- | ---------- | ------------ | ------ | ----- |
+| 1  | Mercury | gray       | 0            | 0.55   | FALSE |
+| 2  | Venus   | yellow     | 0            | 0.82   | FALSE |
+| 3  | Earth   | blue       | 1            | 1.00   | FALSE |
+| 4  | Mars    | red        | 2            | 0.11   | FALSE |
+| 5  | Jupiter | orange     | 67           | 317.90 | FALSE |
+| 6  | Saturn  | hazel      | 62           | 95.19  | TRUE  |
+| 7  | Uranus  | light blue | 27           | 14.54  | TRUE  |
+| 8  | Neptune | dark blue  | 14           | 17.15  | TRUE  |
 
 Write SQL queries for each of the statements below using the same pandas wrapping syntax from the previous lesson.
 
@@ -64,11 +72,7 @@ Write SQL queries for each of the statements below using the same pandas wrappin
 
 ```python
 # __SOLUTION__ 
-# Your code here
-cur.execute("""SELECT name, color FROM planets;""")
-df = pd.DataFrame(cur.fetchall())
-df.columns = [x[0] for x in cur.description]
-df
+pd.read_sql("""SELECT name, color FROM planets;""", conn)
 ```
 
 
@@ -154,11 +158,7 @@ df
 
 ```python
 # __SOLUTION__ 
-# Your code here
-cur.execute("""SELECT * FROM planets WHERE mass > 1;""")
-df = pd.DataFrame(cur.fetchall())
-df.columns = [x[0] for x in cur.description]
-df
+pd.read_sql("""SELECT * FROM planets WHERE mass > 1.00;""", conn)
 ```
 
 
@@ -243,11 +243,7 @@ df
 
 ```python
 # __SOLUTION__ 
-# Your code here
-cur.execute("""SELECT name, mass FROM planets WHERE mass <= 1;""")
-df = pd.DataFrame(cur.fetchall())
-df.columns = [x[0] for x in cur.description]
-df
+pd.read_sql("""SELECT name, mass FROM planets WHERE mass <= 1.00;""", conn)
 ```
 
 
@@ -312,11 +308,7 @@ df
 
 ```python
 # __SOLUTION__ 
-# Your code here
-cur.execute("""SELECT name, color FROM planets WHERE num_of_moons > 10;""")
-df = pd.DataFrame(cur.fetchall())
-df.columns = [x[0] for x in cur.description]
-df
+pd.read_sql("""SELECT name, color FROM planets WHERE num_of_moons > 10;""", conn)
 ```
 
 
@@ -380,14 +372,20 @@ df
 
 
 ```python
-# __SOLUTION__ 
-# Your code here
-cur.execute("""SELECT * FROM planets 
-               WHERE num_of_moons >=1 
-               AND mass < 1;""")
-df = pd.DataFrame(cur.fetchall())
-df.columns = [x[0] for x in cur.description]
-df
+# __SOLUTION__
+
+# Now that there is an AND, spreading out the query and execution
+# to separate lines for readability
+q = """
+SELECT *
+FROM planets
+WHERE num_of_moons >= 1
+    AND mass < 1.00
+;
+"""
+# ^ we also could add LIMIT 1 if we wanted to ensure exactly 1
+# result, since it says "the planet" in the question
+pd.read_sql(q, conn)
 ```
 
 
@@ -445,30 +443,81 @@ df
 
 ```python
 # __SOLUTION__ 
-# Your code here
-cur.execute("""SELECT name, color 
-               FROM planets 
-               WHERE color == 'blue'
-               OR color == 'light blue'
-               OR color == 'dark blue';
-               """)
-df = pd.DataFrame(cur.fetchall())
-df.columns = [x[0] for x in cur.description]
-df
+q = """
+SELECT name, color
+FROM planets
+WHERE color = 'blue'
+    OR color = 'light blue'
+    OR color = 'dark blue'
+;
+"""
+pd.read_sql(q, conn)
+```
 
 
-## While the above solution works, it's a bit clunky and inefficient.
-## Here is an alternate solution that makes use of SQL's LIKE clause.
-## For more information on the LIKE clause, check out this resource
-## http://www.sqlitetutorial.net/sqlite-like/
 
-# cur.execute("""SELECT name, color 
-#              FROM planets
-#              WHERE color LIKE '%blue%';
-#              """)
-# df = pd.DataFrame(cur.fetchall())
-# df.columns = [x[0] for x in cur.description]
-# df
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>color</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Earth</td>
+      <td>blue</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Uranus</td>
+      <td>light blue</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Neptune</td>
+      <td>dark blue</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+# __SOLUTION__
+
+# While the above solution works to answer this specific prompt,
+# it's a bit clunky. If, instead, we wanted to select all planets
+# with "blue" colors, we could use SQL's LIKE clause.
+# For more information on the LIKE clause, check out this resource
+# https://www.sqlitetutorial.net/sqlite-like/
+
+q = """
+SELECT name, color
+FROM planets
+WHERE color LIKE '%blue%'
+;
+"""
+pd.read_sql(q, conn)
 ```
 
 
@@ -520,6 +569,12 @@ df
 
 ## Select the name, color, and number of moons for the 4 largest planets that don't have rings and order them from largest to smallest
 
+Note: even though the schema states that `rings` is a `BOOLEAN` and the example table shows values `TRUE` and `FALSE`, SQLite does not actually support booleans natively. From the [documentation](https://www.sqlite.org/datatype3.html#boolean_datatype):
+
+> SQLite does not have a separate Boolean storage class. Instead, Boolean values are stored as integers 0 (false) and 1 (true).
+
+Keep this in mind when you are filtering for "planets that don't have rings".
+
 
 ```python
 # Your code here
@@ -528,15 +583,15 @@ df
 
 ```python
 # __SOLUTION__ 
-# Your code here
-cur.execute("""SELECT name, color, num_of_moons 
-               FROM planets
-               WHERE rings = 0
-               ORDER BY mass DESC
-               LIMIT 4;""")
-df = pd.DataFrame(cur.fetchall())
-df.columns = [x[0] for x in cur.description]
-df
+q = """
+SELECT name, color, num_of_moons
+FROM planets
+WHERE rings = 0
+ORDER BY mass DESC
+LIMIT 4
+;
+"""
+pd.read_sql(q, conn)
 ```
 
 
