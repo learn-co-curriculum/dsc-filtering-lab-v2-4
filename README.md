@@ -1,4 +1,3 @@
-
 # Selecting Data - Lab
 
 
@@ -16,31 +15,42 @@ You will be able to:
 * Write SQL queries to filter and order results
 * Retrieve a subset of columns from a table
 
-## Connecting to the DataBase
+## Connecting to the Database
 
-To get started import pandas and sqlite3. Then, connect to the database titled `planets.db`. 
-
-Don't forget to instantiate a cursor so that you can later execute your queries.
+To get started, import `sqlite3` as well as `pandas` for conveniently displaying results. Then, connect to the SQLite database located at `planets.db`. 
 
 
 ```python
 # Your code here
 ```
 
-## Selecting Data
+## Database Schema
 
-Here's an overview of the planet's table you'll be querying.
+This database contains a single table, `planets`. This is the schema:
 
-|name   |color |num_of_moons|mass|rings|
-|-------|-------|-------|-------|-------|
-|Mercury|gray   |0      |0.55   |no     |
-|Venus  |yellow |0      |0.82   |no     |
-|Earth  |blue   |1      |1.00   |no     |
-|Mars   |red    |2      |0.11   |no     |
-|Jupiter|orange |67     |317.90 |no     |
-|Saturn |hazel  |62     |95.19  |yes    |
-|Uranus |light blue|27  |14.54  |yes    |
-|Neptune|dark blue|14   |17.15  |yes    |
+```
+CREATE TABLE planets (
+  id INTEGER PRIMARY KEY,
+  name TEXT,
+  color TEXT,
+  num_of_moons INTEGER,
+  mass REAL,
+  rings BOOLEAN
+);
+```
+
+The data looks something like this:
+
+| id | name    | color      | num_of_moons | mass   | rings |
+| -- | ------- | ---------- | ------------ | ------ | ----- |
+| 1  | Mercury | gray       | 0            | 0.55   | FALSE |
+| 2  | Venus   | yellow     | 0            | 0.82   | FALSE |
+| 3  | Earth   | blue       | 1            | 1.00   | FALSE |
+| 4  | Mars    | red        | 2            | 0.11   | FALSE |
+| 5  | Jupiter | orange     | 67           | 317.90 | FALSE |
+| 6  | Saturn  | hazel      | 62           | 95.19  | TRUE  |
+| 7  | Uranus  | light blue | 27           | 14.54  | TRUE  |
+| 8  | Neptune | dark blue  | 14           | 17.15  | TRUE  |
 
 Write SQL queries for each of the statements below using the same pandas wrapping syntax from the previous lesson.
 
@@ -88,6 +98,12 @@ Write SQL queries for each of the statements below using the same pandas wrappin
 ```
 
 ## Select the name, color, and number of moons for the 4 largest planets that don't have rings and order them from largest to smallest
+
+Note: even though the schema states that `rings` is a `BOOLEAN` and the example table shows values `TRUE` and `FALSE`, SQLite does not actually support booleans natively. From the [documentation](https://www.sqlite.org/datatype3.html#boolean_datatype):
+
+> SQLite does not have a separate Boolean storage class. Instead, Boolean values are stored as integers 0 (false) and 1 (true).
+
+Keep this in mind when you are filtering for "planets that don't have rings".
 
 
 ```python
