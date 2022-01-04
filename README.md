@@ -1,5 +1,4 @@
-# Selecting Data - Lab
-
+# Filtering Data with SQL - Lab
 
 ## Introduction 
 
@@ -8,12 +7,12 @@ NASA wants to go to Mars! Before they build their rocket, NASA needs to track in
 <img src="./images/planets.png" width="600">
 
 ## Objectives
-You will be able to:
-* Connect to a SQL database using Python
-* Retrieve all information from a SQL table
+
+You will practice the following:
+
 * Retrieve a subset of records from a table using a `WHERE` clause
-* Write SQL queries to filter and order results
-* Retrieve a subset of columns from a table
+* Filter results using conditional operators such as `BETWEEN`, `IS NULL`, and `LIKE`
+* Apply an aggregate function to the result of a filtered query
 
 ## Connecting to the Database
 
@@ -52,63 +51,169 @@ The data looks something like this:
 | 7  | Uranus  | light blue | 27           | 14.54  | TRUE  |
 | 8  | Neptune | dark blue  | 14           | 17.15  | TRUE  |
 
+## SQL Queries
+
 Write SQL queries for each of the statements below using the same pandas wrapping syntax from the previous lesson.
 
-## Select just the name and color of each planet
+### 1. Select just the `name` and `color` of each planet
 
 
 ```python
 # Your code here
 ```
 
-## Select all columns for each planet whose mass is greater than 1.00
-
-
-
-```python
-# Your code here
-```
-
-## Select the name and mass of each planet whose mass is less than or equal to 1.00
+### 2. Select all columns for each planet whose `num_of_moons` is 0
 
 
 ```python
 # Your code here
 ```
 
-## Select the name and color of each planet that has more than 10 moons
+### 3. Select the `name` and `mass` of each planet whose `name` has exactly 7 letters
 
 
 ```python
 # Your code here
 ```
 
-## Select the planet that has at least one moon and a mass less than 1.00
+### 4. Select all columns for each planet whose `mass` is greater than 1.00
 
 
 ```python
 # Your code here
 ```
 
-## Select the name and color of planets that have a color of blue, light blue, or dark blue
+### 5. Select the `name` and `mass` of each planet whose `mass` is less than or equal to 1.00
 
 
 ```python
 # Your code here
 ```
 
-## Select the name, color, and number of moons for the 4 largest planets that don't have rings and order them from largest to smallest
+### 6. Select the `name` and `mass` of each planet whose `mass` is between 0 and 50
+
+
+```python
+# Your code here
+```
+
+### 7. Select all columns for planets that have at least one moon and a `mass` less than 1.00
+
+***Hint:*** You can use `AND` to chain together two conditions in SQL, similar to `and` in Python
+
+
+```python
+# Your code here
+```
+
+### 8. Select the `name` and `color` of planets that have a `color` containing the string "blue"
+
+
+```python
+# Your code here
+```
+
+### 9. Select all columns for planets that don't have rings
 
 Note: even though the schema states that `rings` is a `BOOLEAN` and the example table shows values `TRUE` and `FALSE`, SQLite does not actually support booleans natively. From the [documentation](https://www.sqlite.org/datatype3.html#boolean_datatype):
 
 > SQLite does not have a separate Boolean storage class. Instead, Boolean values are stored as integers 0 (false) and 1 (true).
 
-Keep this in mind when you are filtering for "planets that don't have rings".
+
+```python
+# Your code here
+```
+
+### 10. Select the name of all planets, along with a value `has_rings` that returns "Yes" if the planet does have rings, and "No" if it does not
 
 
 ```python
 # Your code here
 ```
+
+
+```python
+pd.read_sql("""
+SELECT name,
+       CASE rings
+       WHEN 1 THEN "Yes"
+       WHEN 0 THEN "No"
+       END AS has_rings
+  FROM planets;
+""", conn)
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>has_rings</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Mercury</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Venus</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Earth</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Mars</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Jupiter</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Saturn</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Uranus</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Neptune</td>
+      <td>Yes</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
 
 ## Summary
 
