@@ -113,7 +113,7 @@ Write SQL queries for each of the statements below using the same pandas wrappin
 # Your code here
 ```
 
-### 9. Select all columns for planets that don't have rings
+### 9. Select the count of planets that don't have rings as `planets_without_rings`
 
 Note: even though the schema states that `rings` is a `BOOLEAN` and the example table shows values `TRUE` and `FALSE`, SQLite does not actually support booleans natively. From the [documentation](https://www.sqlite.org/datatype3.html#boolean_datatype):
 
