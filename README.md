@@ -672,7 +672,7 @@ SELECT name, color
 
 
 
-### 9. Select all columns for planets that don't have rings
+### 9. Select the count of planets that don't have rings as `planets_without_rings`
 
 Note: even though the schema states that `rings` is a `BOOLEAN` and the example table shows values `TRUE` and `FALSE`, SQLite does not actually support booleans natively. From the [documentation](https://www.sqlite.org/datatype3.html#boolean_datatype):
 
@@ -691,7 +691,7 @@ Note: even though the schema states that `rings` is a `BOOLEAN` and the example 
 # WHERE NOT rings
 
 pd.read_sql("""
-SELECT *
+SELECT COUNT(*) AS planets_without_rings
   FROM planets
  WHERE rings = 0;
 """, conn)
@@ -718,59 +718,13 @@ SELECT *
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>id</th>
-      <th>name</th>
-      <th>color</th>
-      <th>num_of_moons</th>
-      <th>mass</th>
-      <th>rings</th>
+      <th>planets_without_rings</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>1</td>
-      <td>Mercury</td>
-      <td>gray</td>
-      <td>0</td>
-      <td>0.55</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2</td>
-      <td>Venus</td>
-      <td>yellow</td>
-      <td>0</td>
-      <td>0.82</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>3</td>
-      <td>Earth</td>
-      <td>blue</td>
-      <td>1</td>
-      <td>1.00</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>4</td>
-      <td>Mars</td>
-      <td>red</td>
-      <td>2</td>
-      <td>0.11</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>4</th>
       <td>5</td>
-      <td>Jupiter</td>
-      <td>orange</td>
-      <td>68</td>
-      <td>317.90</td>
-      <td>0</td>
     </tr>
   </tbody>
 </table>
