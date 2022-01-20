@@ -741,6 +741,7 @@ SELECT COUNT(*) AS planets_without_rings
 
 
 ```python
+# __SOLUTION__
 pd.read_sql("""
 SELECT name,
        CASE rings
