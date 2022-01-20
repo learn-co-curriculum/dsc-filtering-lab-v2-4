@@ -674,6 +674,90 @@ SELECT COUNT(*) AS planets_without_rings
 
 ### 10. Select the name of all planets, along with a value `has_rings` that returns "Yes" if the planet does have rings, and "No" if it does not
 
+
+```python
+pd.read_sql("""
+SELECT name,
+       CASE rings
+       WHEN 1 THEN "Yes"
+       WHEN 0 THEN "No"
+       END AS has_rings
+  FROM planets;
+""", conn)
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>has_rings</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Mercury</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Venus</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Earth</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Mars</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Jupiter</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Saturn</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Uranus</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Neptune</td>
+      <td>Yes</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
 ## Summary
 
 Congratulations! NASA is one step closer to embarking upon its mission to Mars. In this lab, You practiced writing `SELECT` statements that query a single table to get specific information. You also used other clauses and specified column names to cherry-pick the data we wanted to retrieve. 
