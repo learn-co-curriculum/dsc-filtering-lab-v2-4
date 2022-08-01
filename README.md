@@ -4,7 +4,7 @@
 
 NASA wants to go to Mars! Before they build their rocket, NASA needs to track information about all of the planets in the Solar System. In this lab, you'll practice querying the database with various `SELECT` statements. This will include selecting different columns and implementing other SQL clauses like `WHERE` to return the data desired.
 
-<img src="./images/planets.png" width="600">
+<img src="https://raw.githubusercontent.com/learn-co-curriculum/dsc-filtering-lab-v2-4/master/images/planets.png" alt="image of solar system" width="600">
 
 ## Objectives
 
